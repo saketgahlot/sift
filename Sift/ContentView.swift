@@ -6,7 +6,6 @@ struct ContentView: View {
     @State private var selectedImage: UIImage?
     @State private var showImagePicker = false
     @State private var showCamera = false
-    @State private var showARMode = false
     @State private var showSettings = false // NEW: State for settings
     @State private var hasClassified = false
     @State private var predictionResult = ""
@@ -61,24 +60,6 @@ struct ContentView: View {
                 // Scrollable Content
                 ScrollView {
                     VStack(spacing: 40) {
-                    
-                    // NEW: AR Mode Button - Featured prominently
-                    Button(action: {
-                        showARMode = true
-                    }) {
-                        HStack(spacing: 12) {
-                            Image(systemName: "viewfinder")
-                                .font(.system(size: 20, weight: .thin))
-                            Text("AR SCAN MODE")
-                                .font(.system(size: 12, weight: .medium, design: .monospaced))
-                                .tracking(2)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 60)
-                        .background(Color.black)
-                        .foregroundColor(.white)
-                        .cornerRadius(4)
-                    }
                     
                     // Divider
                     HStack(spacing: 12) {
@@ -280,10 +261,6 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showSettings) {
                 SettingsView()
-            }
-            // Full screen AR mode
-            .fullScreenCover(isPresented: $showARMode) {
-                ARScanView()
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
